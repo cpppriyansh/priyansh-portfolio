@@ -23,6 +23,11 @@ export function TeckStack() {
       >
         <ul className="flex flex-wrap gap-4 select-none">
           {TECH_STACK.map((tech) => {
+            // Use icon URL from config or fallback to local path
+            const iconUrl = tech.icon || `/tech-stack-icons/${tech.key}.svg`;
+            const lightIconUrl = tech.iconLight || `/tech-stack-icons/${tech.key}-light.svg`;
+            const darkIconUrl = tech.iconDark || `/tech-stack-icons/${tech.key}-dark.svg`;
+
             return (
               <li key={tech.key} className="flex">
                 <SimpleTooltip content={tech.title}>
@@ -35,7 +40,7 @@ export function TeckStack() {
                     {tech.theme ? (
                       <>
                         <Image
-                          src={`https://assets.chanhdai.com/images/tech-stack-icons/${tech.key}-light.svg`}
+                          src={lightIconUrl}
                           alt={`${tech.title} light icon`}
                           width={32}
                           height={32}
@@ -43,7 +48,7 @@ export function TeckStack() {
                           unoptimized
                         />
                         <Image
-                          src={`https://assets.chanhdai.com/images/tech-stack-icons/${tech.key}-dark.svg`}
+                          src={darkIconUrl}
                           alt={`${tech.title} dark icon`}
                           width={32}
                           height={32}
@@ -53,7 +58,7 @@ export function TeckStack() {
                       </>
                     ) : (
                       <Image
-                        src={`https://assets.chanhdai.com/images/tech-stack-icons/${tech.key}.svg`}
+                        src={iconUrl}
                         alt={`${tech.title} icon`}
                         width={32}
                         height={32}

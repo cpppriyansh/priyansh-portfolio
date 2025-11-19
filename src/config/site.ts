@@ -19,19 +19,11 @@ export const MAIN_NAV: NavItem[] = [
     title: "Portfolio",
     href: "/",
   },
-  {
-    title: "Components",
-    href: "/components",
-  },
-  {
-    title: "Blog",
-    href: "/blog",
-  },
 ];
 
-export const GITHUB_USERNAME = "ncdai";
-export const SOURCE_CODE_GITHUB_REPO = "ncdai/chanhdai.com";
-export const SOURCE_CODE_GITHUB_URL = "https://github.com/ncdai/chanhdai.com";
+export const GITHUB_USERNAME = "cpppriyansh";
+export const SOURCE_CODE_GITHUB_REPO = "cpppriyansh/priyansh-portfolio";
+export const SOURCE_CODE_GITHUB_URL = "https://github.com/cpppriyansh/priyansh-portfolio";
 
 export const UTM_PARAMS = {
   utm_source: "chanhdai.com",
