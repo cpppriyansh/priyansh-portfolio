@@ -26,12 +26,6 @@ export function GitHubStars({ repo, stargazersCount }: GitHubStarsProps) {
                 fill="currentColor"
               />
             </svg>
-            <span className="text-[13px] text-muted-foreground tabular-nums">
-              {new Intl.NumberFormat("en-US", {
-                notation: "compact",
-                compactDisplay: "short",
-              }).format(stargazersCount)}
-            </span>
           </a>
         </Button>
       </TooltipTrigger>

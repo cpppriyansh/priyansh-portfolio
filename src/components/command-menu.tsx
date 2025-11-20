@@ -281,7 +281,7 @@ export function CommandMenu() {
             </CommandItem>
 
             <CommandItem asChild>
-              <a href="https://assets.chanhdai.com/chanhdai-brand.zip" download>
+              <a href="https://res.cloudinary.com/duz9xipfm/image/upload/v1763634520/PJ_logo_kz9w4s.png" download>
                 <DownloadIcon />
                 Download Brand Assets
               </a>
