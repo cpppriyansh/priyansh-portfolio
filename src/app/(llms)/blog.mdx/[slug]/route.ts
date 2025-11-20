@@ -1,32 +1,20 @@
-import { notFound } from "next/navigation";
+import { NextResponse } from "next/server";
 
-import { getAllPosts } from "@/features/blog/data/posts";
-import { getLLMText } from "@/features/blog/lib/get-llm-text";
+// This route is not being used in the current setup
+export const dynamic = "force-static";
 
 export async function generateStaticParams() {
-  const posts = getAllPosts();
-
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
+  return [];
 }
 
-export async function GET(
-  _request: Request,
-  { params }: { params: Promise<{ slug: string }> }
-) {
-  const { slug } = await params;
-
-  const allPosts = getAllPosts();
-  const post = allPosts.find((post) => post.slug === slug);
-
-  if (!post) {
-    notFound();
-  }
-
-  return new Response(await getLLMText(post), {
-    headers: {
-      "Content-Type": "text/markdown;charset=utf-8",
-    },
-  });
+export async function GET() {
+  return NextResponse.json(
+    { message: "Blog feature is not enabled" },
+    {
+      status: 404,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
 }

@@ -16,8 +16,6 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { registryConfig } from "@/config/registry";
-import { getPostsByCategory } from "@/features/blog/data/posts";
-import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Components",
@@ -32,9 +30,15 @@ const componentsJSON = `\`\`\`json title="components.json" showLineNumbers {3}
 }
 \`\`\``;
 
-export default function Page() {
-  const posts = getPostsByCategory("components");
+// Example component data - replace with your actual components
+const exampleComponents = [
+  { name: 'Button', description: 'A reusable button component' },
+  { name: 'Card', description: 'A container for content' },
+  { name: 'Input', description: 'Form input field' },
+  // Add more components as needed
+];
 
+export default function Page() {
   return (
     <div className="min-h-svh">
       <div className="screen-line-after px-4">
@@ -46,7 +50,7 @@ export default function Page() {
           {metadata.description} <span className="max-md:block" />
           <a
             className="whitespace-nowrap underline-offset-4 hover:underline"
-            href={`https://ui.shadcn.com/docs/directory?q=${registryConfig.namespace}&utm_source=chanhdai.com&utm_medium=referral&utm_campaign=components`}
+            href={`https://ui.shadcn.com/docs/directory?q=${registryConfig.namespace}&utm_source=priyansh-j.vercel.app&utm_medium=referral&utm_campaign=components`}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -101,67 +105,34 @@ export default function Page() {
               </Button>
 
               <DialogClose asChild>
-                <Button>Done</Button>
+                <Button type="button" variant="secondary">
+                  Close
+                </Button>
               </DialogClose>
             </DialogFooter>
           </DialogContent>
         </Dialog>
-
-        {/* <div className="pointer-events-none absolute -inset-x-px inset-y-0 rounded-xl border" /> */}
       </div>
 
-      <div className="relative mt-4">
-        <div className="absolute inset-0 -z-1 grid grid-cols-1 gap-4 max-sm:hidden sm:grid-cols-2">
-          <div className="border-r border-edge"></div>
-          <div className="border-l border-edge"></div>
-        </div>
-
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          {posts
-            .slice()
-            .sort((a, b) =>
-              a.metadata.title.localeCompare(b.metadata.title, "en", {
-                sensitivity: "base",
-              })
-            )
-            .map((post) => (
-              <Link
-                key={post.slug}
-                href={`/components/${post.slug}`}
-                className={cn(
-                  "group/post flex items-center pr-4 hover:bg-accent2",
-                  "max-sm:screen-line-before max-sm:screen-line-after",
-                  "sm:nth-[2n+1]:screen-line-before sm:nth-[2n+1]:screen-line-after"
-                )}
-              >
-                <div
-                  className="mx-4 flex size-6 shrink-0 items-center justify-center rounded-lg border border-muted-foreground/15 bg-muted ring-1 ring-edge ring-offset-1 ring-offset-background"
-                  aria-hidden
-                >
-                  <ComponentIcon
-                    className="pointer-events-none size-4 text-muted-foreground"
-                    variant={post.metadata.icon}
-                  />
-                </div>
-
-                <div className="border-l border-dashed border-edge p-4">
-                  <h2 className="leading-snug font-medium text-balance underline-offset-4 group-hover/post:underline">
-                    {post.metadata.title}
-                  </h2>
-                </div>
-
-                {post.metadata.new && (
-                  <span className="flex translate-y-px items-center justify-center">
-                    <span className="flex size-2 rounded-sm bg-info" />
-                    <span className="sr-only">New</span>
-                  </span>
-                )}
-              </Link>
-            ))}
-        </div>
+      <div className="grid gap-4 p-4 sm:grid-cols-2 lg:grid-cols-3">
+        {exampleComponents.map((component, index) => (
+          <Link
+            key={index}
+            href={`/components/${component.name.toLowerCase()}`}
+            className="group relative flex flex-col gap-2 rounded-lg border p-4 transition-colors hover:bg-accent/50"
+          >
+            <div className="flex items-center gap-2">
+              <div className="flex size-8 items-center justify-center rounded-md bg-primary/10 p-2 text-primary">
+                <ComponentIcon className="size-4" />
+              </div>
+              <h2 className="text-lg font-semibold">{component.name}</h2>
+            </div>
+            <p className="text-sm text-muted-foreground">
+              {component.description}
+            </p>
+          </Link>
+        ))}
       </div>
-
-      <div className="h-4" />
     </div>
   );
 }

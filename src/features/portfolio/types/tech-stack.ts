@@ -14,4 +14,8 @@ export type TechStack = {
   icon?: string;
   /** If true, use theme-specific icons */
   theme?: boolean;
+  /** URL to light theme icon */
+  iconLight?: string;
+  /** URL to dark theme icon */
+  iconDark?: string;
 };

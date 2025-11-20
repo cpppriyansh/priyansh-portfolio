@@ -1,125 +1,120 @@
 import fs from "node:fs";
 import path from "node:path";
-
 import { visit } from "unist-util-visit";
+import type { Node, Parent } from "unist";
 
-import { Index } from "@/__registry__/index";
-import type { UnistNode, UnistTree } from "@/types/unist";
+type UnistNode = Node & {
+  name?: string;
+  attributes?: Array<{
+    name: string;
+    value?: string | boolean | number;
+    type?: string;
+  }>;
+  children?: UnistNode[];
+  value?: string;
+  tagName?: string;
+  properties?: Record<string, any>;
+  data?: {
+    meta?: string;
+  };
+};
+
+type UnistTree = Node & {
+  children: UnistNode[];
+};
+
+function getNodeAttributeByName(node: UnistNode, name: string) {
+  return node.attributes?.find((attribute) => attribute.name === name);
+}
 
 export function remarkComponent() {
   return async (tree: UnistTree) => {
-    visit(tree, (node: UnistNode, index, parent) => {
-      // src prop overrides both name and fileName.
-      const { value: srcPath } =
-        (getNodeAttributeByName(node, "src") as {
-          name: string;
-          value?: string;
-          type?: string;
-        }) || {};
-
-      if (node.name === "ComponentSource") {
-        const name = getNodeAttributeByName(node, "name")?.value as string;
-        const fileName = getNodeAttributeByName(node, "fileName")?.value as
-          | string
-          | undefined;
+    visit(tree as Node, (node: Node) => {
+      const unistNode = node as UnistNode;
+      // Handle ComponentSource nodes
+      if (unistNode.name === "ComponentSource") {
+        const srcAttr = getNodeAttributeByName(unistNode, "src");
+        const srcPath = srcAttr?.value as string | undefined;
+        const name = getNodeAttributeByName(unistNode, "name")?.value as string | undefined;
 
         if (!name && !srcPath) {
-          return null;
+          return;
         }
 
         try {
-          let src: string;
-
           if (srcPath) {
-            src = path.join(process.cwd(), srcPath);
-          } else {
-            const component = Index[name];
-            src = fileName
-              ? component.files.find((file: unknown) => {
-                  if (typeof file === "string") {
-                    return (
-                      file.endsWith(`${fileName}.tsx`) ||
-                      file.endsWith(`${fileName}.ts`)
-                    );
-                  }
-                  return false;
-                }) || component.files[0]?.path
-              : component.files[0]?.path;
-          }
+            const filePath = path.join(process.cwd(), srcPath);
+            const source = fs.readFileSync(filePath, "utf8");
+            const processedSource = source.replaceAll(`@/registry/`, "@/components/ncdai/");
 
-          // Read the source file.
-          const filePath = src;
-          let source = fs.readFileSync(filePath, "utf8");
+            const title = getNodeAttributeByName(unistNode, "title");
+            const showLineNumbers = getNodeAttributeByName(unistNode, "showLineNumbers");
 
-          // Replace imports.
-          // TODO: Use @swc/core and a visitor to replace this.
-          // For now a simple regex should do.
-          source = source.replaceAll(`@/registry/`, "@/components/");
-          source = source.replaceAll("export default", "export");
+            const codeBlock = {
+              type: "code",
+              lang: path.extname(filePath).slice(1),
+              meta: [
+                title ? `title="${title?.value}"` : "",
+                showLineNumbers ? "showLineNumbers" : "",
+              ].filter(Boolean).join(" "),
+              value: processedSource,
+            };
 
-          const title = getNodeAttributeByName(node, "title");
-          const showLineNumbers = getNodeAttributeByName(
-            node,
-            "showLineNumbers"
-          );
+            const parentNode = node as Parent;
+            if (parentNode && parentNode.children) {
+              const nodeIndex = parentNode.children.indexOf(node);
+              if (nodeIndex !== -1) {
+                parentNode.children[nodeIndex] = codeBlock as any;
+              }
+            }
+          } else if (name) {
+            // For components without src path, show a placeholder
+            const placeholder = {
+              type: "paragraph",
+              children: [{
+                type: "text",
+                value: `[Component source for ${name} would be shown here]`
+              }]
+            };
 
-          const codeBlock = {
-            type: "code",
-            meta: [
-              title ? `title="${title.value}"` : "",
-              showLineNumbers ? "showLineNumbers" : "",
-            ].join(" "),
-            lang: path.extname(filePath).slice(1),
-            value: source,
-          };
-
-          if (parent && typeof index === "number") {
-            parent.children.splice(index, 1, codeBlock);
+            const parentNode = node as Parent;
+            if (parentNode && parentNode.children) {
+              const nodeIndex = parentNode.children.indexOf(node);
+              if (nodeIndex !== -1) {
+                parentNode.children[nodeIndex] = placeholder as any;
+              }
+            }
           }
         } catch (error) {
-          console.error(error);
+          console.error("Error processing component source:", error);
         }
       }
 
-      if (node.name === "ComponentPreview") {
-        const name = getNodeAttributeByName(node, "name")?.value as string;
+      // Handle ComponentPreview nodes
+      if (unistNode.name === "ComponentPreview") {
+        const name = getNodeAttributeByName(unistNode, "name")?.value as string;
 
         if (!name) {
-          return null;
+          return;
         }
 
-        try {
-          const component = Index[name];
+        // Create a placeholder for component previews
+        const placeholder = {
+          type: "paragraph",
+          children: [{
+            type: "text",
+            value: `[Component preview for ${name} would be shown here]`
+          }]
+        };
 
-          const src = component.files[0]?.path;
-
-          // Read the source file.
-          const filePath = src;
-          let source = fs.readFileSync(filePath, "utf8");
-
-          // Replace imports.
-          // TODO: Use @swc/core and a visitor to replace this.
-          // For now a simple regex should do.
-          source = source.replaceAll(`@/registry/`, "@/components/");
-          source = source.replaceAll("export default", "export");
-
-          const codeBlock = {
-            type: "code",
-            lang: "tsx",
-            value: source,
-          };
-
-          if (parent && typeof index === "number") {
-            parent.children.splice(index, 1, codeBlock);
+        const parentNode = node as Parent;
+        if (parentNode && parentNode.children) {
+          const nodeIndex = parentNode.children.indexOf(node);
+          if (nodeIndex !== -1) {
+            parentNode.children[nodeIndex] = placeholder as any;
           }
-        } catch (error) {
-          console.error(error);
         }
       }
     });
   };
-}
-
-function getNodeAttributeByName(node: UnistNode, name: string) {
-  return node.attributes?.find((attribute) => attribute.name === name);
 }

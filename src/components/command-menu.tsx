@@ -1,22 +1,19 @@
 "use client";
 
-import { useCommandState } from "cmdk";
 import type { LucideProps } from "lucide-react";
 import {
   BriefcaseBusinessIcon,
   CircleUserIcon,
   CornerDownLeftIcon,
   DownloadIcon,
-  LetterTextIcon,
+  FileTextIcon,
   MessageCircleMoreIcon,
   MoonStarIcon,
   RssIcon,
   SunMediumIcon,
-  TextIcon,
-  TriangleDashedIcon,
   TypeIcon,
+  ZapIcon,
 } from "lucide-react";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
@@ -37,7 +34,7 @@ import { cn } from "@/lib/utils";
 import { copyText } from "@/utils/copy";
 
 import { PriyanshSvg, getMarkSVG } from "./priyansh-svg";
-import { getWordmarkSVG } from "./chanhdai-wordmark";
+import { getWordmarkSVG } from "./priyansh-wordmark";
 import { ComponentIcon, Icons } from "./icons";
 import { Button } from "./ui/button";
 import { Separator } from "./ui/separator";
@@ -46,7 +43,7 @@ type CommandLinkItem = {
   title: string;
   href: string;
 
-  icon?: React.ComponentType<LucideProps>;
+  icon?: React.ComponentType<any>;
   iconImage?: string;
   keywords?: string[];
   openInNewTab?: boolean;
@@ -56,7 +53,7 @@ const MENU_LINKS: CommandLinkItem[] = [
   {
     title: "Portfolio",
     href: "/",
-    icon: ChanhDaiMark,
+    icon: PriyanshSvg,
   },
   {
     title: "Components",
@@ -74,7 +71,7 @@ const PORTFOLIO_LINKS: CommandLinkItem[] = [
   {
     title: "About",
     href: "/#about",
-    icon: LetterTextIcon,
+    icon: FileTextIcon,
   },
   {
     title: "Tech Stack",
@@ -120,13 +117,10 @@ const SOCIAL_LINK_ITEMS: CommandLinkItem[] = SOCIAL_LINKS.map((item) => ({
   openInNewTab: true,
 }));
 
-export function CommandMenu({ posts }: { posts: Post[] }) {
+export function CommandMenu() {
   const router = useRouter();
-
   const { setTheme, resolvedTheme } = useTheme();
-
   const [open, setOpen] = useState(false);
-
   const playClick = useSound("/audio/ui-sounds/click.wav");
 
   useEffect(() => {
@@ -191,17 +185,8 @@ export function CommandMenu({ posts }: { posts: Post[] }) {
     [playClick, setTheme]
   );
 
-  const { componentLinks, blogLinks } = useMemo(
-    () => ({
-      componentLinks: posts
-        .filter((post) => post.metadata?.category === "components")
-        .map(postToCommandLinkItem),
-      blogLinks: posts
-        .filter((post) => post.metadata?.category !== "components")
-        .map(postToCommandLinkItem),
-    }),
-    [posts]
-  );
+  // Component links can be expanded here if needed
+  const componentLinks = useMemo(() => [], []);
 
   return (
     <>
@@ -256,15 +241,6 @@ export function CommandMenu({ posts }: { posts: Post[] }) {
           <CommandSeparator />
 
           <CommandLinkGroup
-            heading="Blog"
-            links={blogLinks}
-            fallbackIcon={TextIcon}
-            onLinkSelect={handleOpenLink}
-          />
-
-          <CommandSeparator />
-
-          <CommandLinkGroup
             heading="Social Links"
             links={SOCIAL_LINK_ITEMS}
             onLinkSelect={handleOpenLink}
@@ -281,7 +257,7 @@ export function CommandMenu({ posts }: { posts: Post[] }) {
                 );
               }}
             >
-              <ChanhDaiMark />
+              <PriyanshSvg />
               Copy Mark as SVG
             </CommandItem>
 
@@ -298,9 +274,9 @@ export function CommandMenu({ posts }: { posts: Post[] }) {
             </CommandItem>
 
             <CommandItem
-              onSelect={() => handleOpenLink("/blog/chanhdai-brand")}
+              onSelect={() => handleOpenLink("#")}
             >
-              <TriangleDashedIcon />
+              <ZapIcon />
               Brand Guidelines
             </CommandItem>
 
@@ -368,14 +344,9 @@ function CommandLinkGroup({
             onSelect={() => onLinkSelect(link.href, link.openInNewTab)}
           >
             {link?.iconImage ? (
-              <Image
-                className="rounded-sm"
-                src={link.iconImage}
-                alt={link.title}
-                width={16}
-                height={16}
-                unoptimized
-              />
+              <span className="inline-block size-4">
+                {link.iconImage}
+              </span>
             ) : (
               <Icon />
             )}
@@ -387,65 +358,14 @@ function CommandLinkGroup({
   );
 }
 
-type CommandKind = "command" | "page" | "link";
-
-type CommandMetaMap = Map<
-  string,
-  {
-    commandKind: CommandKind;
-  }
->;
-
-function buildCommandMetaMap() {
-  const commandMetaMap: CommandMetaMap = new Map();
-
-  commandMetaMap.set("Download vCard", { commandKind: "command" });
-
-  commandMetaMap.set("Light", { commandKind: "command" });
-  commandMetaMap.set("Dark", { commandKind: "command" });
-  commandMetaMap.set("Auto", { commandKind: "command" });
-
-  commandMetaMap.set("Copy Mark as SVG", {
-    commandKind: "command",
-  });
-  commandMetaMap.set("Copy Logotype as SVG", {
-    commandKind: "command",
-  });
-  commandMetaMap.set("Download Brand Assets", {
-    commandKind: "command",
-  });
-
-  SOCIAL_LINK_ITEMS.forEach((item) => {
-    commandMetaMap.set(item.title, {
-      commandKind: "link",
-    });
-  });
-
-  return commandMetaMap;
-}
-
-const COMMAND_META_MAP = buildCommandMetaMap();
-
-const ENTER_ACTION_LABELS: Record<CommandKind, string> = {
-  command: "Run Command",
-  page: "Go to Page",
-  link: "Open Link",
-};
-
 function CommandMenuFooter() {
-  const selectedCommandKind = useCommandState(
-    (state) => COMMAND_META_MAP.get(state.value)?.commandKind ?? "page"
-  );
-
   return (
     <>
       <div className="flex h-10" />
-
       <div className="absolute inset-x-0 bottom-0 flex h-10 items-center justify-between gap-2 border-t bg-zinc-100/30 px-4 text-xs font-medium dark:bg-zinc-800/30">
-        <ChanhDaiMark className="size-6 text-muted-foreground" aria-hidden />
-
+        <PriyanshSvg className="size-6 text-muted-foreground" aria-hidden />
         <div className="flex shrink-0 items-center gap-2">
-          <span>{ENTER_ACTION_LABELS[selectedCommandKind]}</span>
+          <span>Select</span>
           <CommandMenuKbd>
             <CornerDownLeftIcon />
           </CommandMenuKbd>
@@ -471,21 +391,4 @@ function CommandMenuKbd({ className, ...props }: React.ComponentProps<"kbd">) {
       {...props}
     />
   );
-}
-
-function postToCommandLinkItem(post: Post): CommandLinkItem {
-  const isComponent = post.metadata?.category === "components";
-
-  const IconComponent = isComponent
-    ? (props: LucideProps) => (
-      <ComponentIcon {...props} variant={post.metadata.icon} />
-    )
-    : undefined;
-
-  return {
-    title: post.metadata.title,
-    href: isComponent ? `/components/${post.slug}` : `/blog/${post.slug}`,
-    keywords: isComponent ? ["component"] : undefined,
-    icon: IconComponent,
-  };
 }

@@ -4,7 +4,6 @@ import { CodeXmlIcon, EyeIcon, RepeatIcon } from "lucide-react";
 import { useTheme } from "next-themes";
 import React, { useMemo, useState } from "react";
 
-import { Index } from "@/__registry__/index";
 import { cn } from "@/lib/utils";
 
 import { CodeCollapsibleWrapper } from "./code-collapsible-wrapper";
@@ -38,18 +37,19 @@ export function ComponentPreview({
   const Code = Codes[0];
 
   const Preview = useMemo(() => {
-    const Component = Index[name]?.component;
+    // Use the first child as the preview
+    const preview = React.Children.toArray(children)[0];
 
-    if (!Component) {
+    if (!preview) {
       return (
         <p className="text-sm text-muted-foreground">
-          Component <CodeInline>{name}</CodeInline> not found in registry.
+          No preview available for <CodeInline>{name}</CodeInline>.
         </p>
       );
     }
 
-    return <Component />;
-  }, [name]);
+    return <>{preview}</>;
+  }, [name, children]);
 
   return (
     <div
@@ -72,7 +72,7 @@ export function ComponentPreview({
           <div
             data-slot="preview"
             className="rounded-xl border border-edge p-2"
-            // className="bg-zinc-950/0.75 bg-[radial-gradient(var(--pattern-foreground)_1px,transparent_0)] bg-size-[10px_10px] [--pattern-foreground:var(--color-zinc-950)]/5 dark:bg-white/0.75 dark:[--pattern-foreground:var(--color-white)]/5"
+          // className="bg-zinc-950/0.75 bg-[radial-gradient(var(--pattern-foreground)_1px,transparent_0)] bg-size-[10px_10px] [--pattern-foreground:var(--color-zinc-950)]/5 dark:bg-white/0.75 dark:[--pattern-foreground:var(--color-white)]/5"
           >
             {(canReplay || openInV0Url) && (
               <div data-slot="buttons" className="mb-2 flex justify-end gap-2">
@@ -96,7 +96,7 @@ export function ComponentPreview({
             <div
               key={`${replay}-${resolvedTheme}`}
               data-slot="component-preview"
-              className="flex min-h-72 items-center justify-center font-sans"
+              className="flex min-h-72 w-full items-center justify-center font-sans"
             >
               <React.Suspense
                 fallback={
