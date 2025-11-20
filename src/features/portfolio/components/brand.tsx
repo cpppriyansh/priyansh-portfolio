@@ -13,14 +13,14 @@ export function Brand() {
   return (
     <Panel>
       <PanelHeader>
-        <PanelTitle>Brand</PanelTitle>
+        <PanelTitle className="underline">Thanks for visiting </PanelTitle>
       </PanelHeader>
 
       <BrandContextMenu>
-        <div className="grid grid-cols-[2rem_1fr]">
+        <div className="grid grid-cols-[2rem_1fr] pt-10">
           <div className="flex h-28 items-center justify-center border-r border-dashed border-edge bg-background">
             <span className="rotate-270 text-sm text-muted-foreground select-none">
-              Mark
+
             </span>
           </div>
 
@@ -30,15 +30,16 @@ export function Brand() {
 
           <div className="flex h-28 items-center justify-center border-r border-dashed border-edge bg-background">
             <span className="rotate-270 text-sm text-muted-foreground select-none">
-              Logotype
+
             </span>
           </div>
 
           <div className="screen-line-after flex items-center justify-center pr-8 after:z-1">
-            <ChanhDaiWordmark className="h-6 w-auto sm:h-10" />
+            <h1 className="text-6xl font-bold">Priyansh Jaisingkar</h1>
           </div>
         </div>
       </BrandContextMenu>
     </Panel>
   );
 }
+
