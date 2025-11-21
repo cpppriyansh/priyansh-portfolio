@@ -43,7 +43,7 @@ export const USER: User = {
 - Worked on real-world projects including **ERP platforms, AI-powered tools, and professional training institute websites.**
 - Strong foundation in **problem-solving, clean code practices, and developing scalable features** that improve user experience.
 `,
-  avatar: "https://assets.chanhdai.com/images/chanhdai-avatar-ghibli.webp",
+  avatar: "https://res.cloudinary.com/duz9xipfm/image/upload/v1763698744/cropped-priyansh_profile_1_onqvkb.avif",
   ogImage:
     "",
   namePronunciationUrl: "",
