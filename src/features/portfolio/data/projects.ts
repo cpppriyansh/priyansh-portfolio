@@ -53,32 +53,6 @@ export const PROJECTS: Project[] = [
   },
 
   {
-    id: "Minimal Portfolio",
-    title: "Minimal Portfolio",
-    period: {
-      start: "03.2024",
-    },
-    link: "https://priyanshhh.vercel.app",
-    skills: [
-      "Next.js 15",
-      "Tailwind CSS v3",
-      "shadcn/ui",
-      "Vercel",
-      "GitHub Actions",
-      "npm-workspace",
-      "TypeScript",
-      "npm",
-      "Tailwind CSS",
-      "shadcn/ui",
-      "Motion",
-      "Framer Motion",
-    ],
-    description: `A minimal, pixel-perfect dev portfolio.
-`,
-
-    logo: "https://assets.chanhdai.com/images/project-logos/quaricdotcom.svg",
-  },
-  {
     id: "critindia",
     title: "CRIT India",
     period: {
@@ -123,6 +97,57 @@ export const PROJECTS: Project[] = [
       "Docker Compose",
       "NGINX",
     ],
+    logo: "https://assets.chanhdai.com/images/project-logos/quaricdotcom.svg",
+  },
+
+  {
+    id: "Connecting Dots ERP",
+    title: "Connecting Dots ERP",
+    period: {
+      start: "08.2025",
+    },
+    link: "https://connectingdotserp.com",
+    skills: [
+      "Next.js 15",
+      "Tailwind CSS v3",
+      "Vercel",
+      "GitHub Actions",
+      "npm-workspace",
+      "TypeScript",
+      "npm",
+      "Tailwind CSS",
+      "shadcn/ui",
+    ],
+    description: `A minimal, pixel-perfect dev portfolio.
+`,
+
+    logo: "https://assets.chanhdai.com/images/project-logos/quaricdotcom.svg",
+  },
+
+  {
+    id: "Minimal Portfolio",
+    title: "Minimal Portfolio",
+    period: {
+      start: "11.2025",
+    },
+    link: "https://priyanshhh.vercel.app",
+    skills: [
+      "Next.js 15",
+      "Tailwind CSS v3",
+      "shadcn/ui",
+      "Vercel",
+      "GitHub Actions",
+      "npm-workspace",
+      "TypeScript",
+      "npm",
+      "Tailwind CSS",
+      "shadcn/ui",
+      "Motion",
+      "Framer Motion",
+    ],
+    description: `A minimal, pixel-perfect dev portfolio.
+`,
+
     logo: "https://assets.chanhdai.com/images/project-logos/quaricdotcom.svg",
   },
 ];

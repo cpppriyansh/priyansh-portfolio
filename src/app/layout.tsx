@@ -78,11 +78,11 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: "https://assets.chanhdai.com/images/favicon.ico",
+        url: "https://res.cloudinary.com/duz9xipfm/image/upload/v1763634520/PJ_logo_kz9w4s.png",
         sizes: "any",
       },
       {
-        url: "https://assets.chanhdai.com/images/favicon.svg",
+        url: "https://res.cloudinary.com/duz9xipfm/image/upload/v1763634520/PJ_logo_kz9w4s.png",
         type: "image/svg+xml",
       },
     ],
