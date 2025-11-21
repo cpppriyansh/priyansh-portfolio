@@ -52,6 +52,59 @@ export const PROJECTS: Project[] = [
 `
   },
 
+
+  {
+    id: "Connecting Dots ERP",
+    title: "Connecting Dots ERP",
+    period: {
+      start: "08.2025",
+    },
+    link: "https://connectingdotserp.com",
+    skills: [
+      "Next.js 15",
+      "Tailwind CSS v3",
+      "Vercel",
+      "GitHub Actions",
+      "npm-workspace",
+      "TypeScript",
+      "npm",
+      "Tailwind CSS",
+      "shadcn/ui",
+    ],
+    description: `A fully responsive ERP training institute website built with Next.js and Node.js, featuring dynamic course content, blog management, and a secure admin dashboard.
+- Developed a professional website for a SAP & IT training institute.
+- Displays dynamic course details, institute information, blogs, and announcements.
+- Integrated a secure Admin Dashboard for managing blogs, content, and user data.
+- Implemented role-based authentication and backend API routes.
+- Ensured the platform is lightning-fast, mobile-friendly, and SEO-optimized.
+`,
+
+    logo: "https://res.cloudinary.com/duz9xipfm/image/upload/v1759471175/3d-logo_1_qwvz8y_1_qqmi4c.avif",
+  },
+
+
+  {
+    id: "Atorix",
+    title: "Atorix IT",
+    period: {
+      start: "03.2024",
+    },
+    link: "https://www.atorixit.com/",
+    skills: [
+      "Company Project",
+      "Next.js 15",
+      "Tailwind CSS v3",
+      "shadcn/ui",
+      "Strapi 5",
+      "VNPAY-QR",
+      "Docker",
+      "Docker Compose",
+      "NGINX",
+    ],
+    logo: "https://assets.chanhdai.com/images/project-logos/quaricdotcom.svg",
+  },
+
+
   {
     id: "critindia",
     title: "CRIT India",
@@ -76,52 +129,7 @@ export const PROJECTS: Project[] = [
 - Implemented backend systems with Node.js, Express, and MongoDB for stable and efficient operations.
 - Ensured high accessibility, optimized assets, and improved overall site performance.
 `,
-    logo: "https://assets.chanhdai.com/images/project-logos/quaricdotcom.svg",
-  },
-
-  {
-    id: "Atorix",
-    title: "Atorix IT",
-    period: {
-      start: "03.2024",
-    },
-    link: "https://www.atorixit.com/",
-    skills: [
-      "Company Project",
-      "Next.js 15",
-      "Tailwind CSS v3",
-      "shadcn/ui",
-      "Strapi 5",
-      "VNPAY-QR",
-      "Docker",
-      "Docker Compose",
-      "NGINX",
-    ],
-    logo: "https://assets.chanhdai.com/images/project-logos/quaricdotcom.svg",
-  },
-
-  {
-    id: "Connecting Dots ERP",
-    title: "Connecting Dots ERP",
-    period: {
-      start: "08.2025",
-    },
-    link: "https://connectingdotserp.com",
-    skills: [
-      "Next.js 15",
-      "Tailwind CSS v3",
-      "Vercel",
-      "GitHub Actions",
-      "npm-workspace",
-      "TypeScript",
-      "npm",
-      "Tailwind CSS",
-      "shadcn/ui",
-    ],
-    description: `A minimal, pixel-perfect dev portfolio.
-`,
-
-    logo: "https://assets.chanhdai.com/images/project-logos/quaricdotcom.svg",
+    logo: "https://res.cloudinary.com/duz9xipfm/image/upload/v1753937310/CRIT-3D_cpzr1n_1_efzl5o.avif",
   },
 
   {
@@ -148,6 +156,6 @@ export const PROJECTS: Project[] = [
     description: `A minimal, pixel-perfect dev portfolio.
 `,
 
-    logo: "https://assets.chanhdai.com/images/project-logos/quaricdotcom.svg",
+    logo: "https://res.cloudinary.com/duz9xipfm/image/upload/v1763634520/PJ_logo_kz9w4s.png",
   },
 ];
