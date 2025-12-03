@@ -195,16 +195,6 @@ export const TECH_STACK: TechStack[] = [
     categories: ["Library", "Animation"],
     icon: "https://cdn.simpleicons.org/framer",
   },
-
-  {
-    key: "chatgpt",
-    title: "ChatGPT",
-    href: "https://chatgpt.com/",
-    categories: ["Tools", "AI"],
-    theme: true,
-    iconLight: "https://cdn.simpleicons.org/openai/000000",
-    iconDark: "https://cdn.simpleicons.org/openai/ffffff",
-  },
   {
     key: "ps",
     title: "Adobe Photoshop",

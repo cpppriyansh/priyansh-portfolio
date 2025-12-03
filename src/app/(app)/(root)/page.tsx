@@ -50,11 +50,13 @@ export default function Page() {
         <TeckStack />
         <Separator />
 
-        <Experiences />
-        <Separator />
 
         <Projects />
         <Separator />
+
+        <Experiences />
+        <Separator />
+
 
         {/*<Awards />
         <Separator />*/}
