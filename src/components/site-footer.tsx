@@ -8,22 +8,9 @@ export function SiteFooter() {
   return (
     <footer className="max-w-screen overflow-x-hidden px-2">
       <div className="screen-line-before mx-auto border-x border-edge pt-4 md:max-w-3xl">
-        <p className="mb-1 px-4 text-center font-mono text-sm text-balance text-muted-foreground">
-          Build with help of tailwindcss.com & ui.shadcn.com
-        </p>
 
-        <p className="mb-4 px-4 text-center font-mono text-sm text-balance text-muted-foreground">
-          Built by{" "}
-          <a
-            className="link"
-            href="https://instagram.com/priyanshhh_8"
-            target="_blank"
-            rel="noopener"
-          >
-            Priyansh Jaisingkar
-          </a>
-          .
-        </p>
+
+
         <p className="mb-4 px-4 text-center font-mono text-sm text-balance text-muted-foreground">Copyright © {new Date().getFullYear()}{" "}
           <a className="link" href="https://github.com/cpppriyansh" target="_blank" rel="noopener">CPPPRIYANSH</a>. </p>
 
