@@ -1,74 +1,56 @@
-# [chanhdai.com](https://chanhdai.com)
+# [priyanshhh.vercel.app](https://priyanshhh.vercel.app)
 
-A minimal, pixel-perfect dev portfolio, component registry, and blog to showcase my work as a Design Engineer.
+A clean, responsive developer portfolio showcasing my projects, skills, and experience as a Full Stack Developer.
 
-Check out the live site: [chanhdai.com](https://chanhdai.com)
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://assets.chanhdai.com/images/screenshot-desktop-dark.webp?t=1763226447">
-  <source media="(prefers-color-scheme: light)" srcset="https://assets.chanhdai.com/images/screenshot-desktop-light.webp?t=1763226447">
-  <img src="https://assets.chanhdai.com/images/screenshot-desktop-light.webp?t=1763226447" alt="Screenshot">
-</picture>
-
-## GitAds Sponsored
-
-[![Sponsored by GitAds](https://gitads.dev/v1/ad-serve?source=ncdai/chanhdai.com@github)](https://gitads.dev/v1/ad-track?source=ncdai/chanhdai.com@github)
+Check out the live site: [priyanshhh.vercel.app](https://priyanshhh.vercel.app)
 
 ## Overview
 
 ### Stack
 
-- Next.js 16
-- Tailwind CSS v4
-- shadcn/ui
+- React.js
+- Next.js
+- Tailwind CSS
+- Node.js / Express.js
+- MongoDB
 
 ### Featured
 
 - Clean & modern design
-- Light/Dark themes
-- vCard integration
-- SEO optimized ([JSON-LD schema](https://json-ld.org), sitemap, robots)
-- AI-ready with [/llms.txt](https://llmstxt.org)
-- Spam-protected email
-- Installable as PWA
+- Fully responsive (desktop, tablet, mobile)
+- Project showcase with live demo links
+- Skills & experience timeline
+- Fast load times & SEO optimized
+- Contact form integration
 
+### Projects Showcased
 
-### Registry
-
-Easily build and distribute reusable components, hooks, and pages using a custom registry powered by the [shadcn CLI](https://ui.shadcn.com/docs/cli).
-
-Each entry is well-documented and includes:
-
-- Live preview & code snippets
-- Beautiful, readable code blocks
-- One-click command blocks (pnpm, npm, yarn, bun)
+- **Brain Tumor Detection Using Explainable AI** — CNN-based MRI classification using VGG16 with Grad-CAM/LIME visualizations for model interpretability
+- **AI Resume & Cover Letter Builder** — React app powered by the Gemini API for AI-generated resumes and cover letters, with Firebase Authentication
 
 ## Development
 
-Please refer to the [Development Guide](./DEVELOPMENT.md) for more details.
+Clone the repo and install dependencies:
+
+```bash
+git clone https://github.com/cpppriyansh/your-repo-name.git
+cd your-repo-name
+npm install
+npm run dev
+```
+
+Then open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## License
 
 Licensed under the [MIT license](./LICENSE).
 
-You're free to use my code! Just make sure to <ins>remove all my personal information</ins> before publishing your website. It's awesome to see my code being useful to someone!
-
-## Star History
-
-[![Star History](https://starchart.cc/ncdai/chanhdai.com.svg?variant=adaptive&line=%23d37f2c)](https://starchart.cc/ncdai/chanhdai.com)
+Feel free to use this as a reference for your own portfolio! If you do, please remove all my personal information before publishing your version.
 
 ## Acknowledgments
 
 - [React](https://react.dev)
 - [Next.js](https://nextjs.org)
 - [Tailwind CSS](https://tailwindcss.com)
-- [Radix UI](https://www.radix-ui.com)
-- [Motion](https://motion.dev)
-- [shadcn/ui](https://ui.shadcn.com)
-- [Aceternity UI](https://ui.aceternity.com)
-- [Kibo UI](https://www.kibo-ui.com)
-- [Lucide](https://lucide.dev)
-- [Fumadocs](https://fumadocs.dev)
-- And many other open-source libraries used in `package.json`
-
-<!-- GitAds-Verify: QICCAB4PFWV9MHUGPGPN5B2I8SAXLAOK -->
+- [Node.js](https://nodejs.org)
+- [MongoDB](https://www.mongodb.com)

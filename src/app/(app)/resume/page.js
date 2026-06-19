@@ -9,7 +9,7 @@ export default function ResumePage() {
             <main className="flex-1 w-full flex items-center justify-center p-6">
                 <div className="w-full max-w-3xl">
                     <iframe
-                        src="https://drive.google.com/file/d/1e20HvEvFgmiDet3XB-PkyvMTN4qovVDa/preview"
+                        src="https://drive.google.com/file/d/13VRxFtAFpsw8ssYGthkJFIzUpq4_90Kb/view?usp=sharing"
                         className="w-full h-[600px] border border-gray-200 rounded-lg shadow-lg"
                         title="Resume - Priyansh Nigam"
                         loading="lazy"
